@@ -1,0 +1,15 @@
+rosbridge:
+  port: 9090
+web:
+  port: 8080
+camera:
+  device: /dev/video0
+  width: 1280
+  height: 720
+  fps: 10
+calibration:
+  mm_per_pixel: 0.4
+conveyor:
+  belt_speed_mps: 0.25
+  latency_ms: 200
+home_pose_rad: [0.0, -1.57, 1.57, -1.57, -1.57, 0.0]
