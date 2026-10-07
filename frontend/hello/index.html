@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Mini Robot Cell</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 40px; }
+    #status { font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Mini Robot Cell Operator Console</h1>
+  <p>ROSBridge: <span id="status">Connecting...</span></p>
+  <script>
+    const status = document.getElementById("status");
+    function connect() {
+      const proto = location.protocol === "https:" ? "wss:" : "ws:";
+      const socket = new WebSocket(proto + "//" + location.host + "/rosbridge");
+      socket.onopen = () => { status.textContent = "CONNECTED"; status.style.color = "green"; };
+      socket.onclose = () => {
+        status.textContent = "DISCONNECTED"; status.style.color = "red";
+        setTimeout(connect, 2000);
+      };
+      socket.onerror = () => { status.textContent = "ERROR"; status.style.color = "red"; };
+    }
+    connect();
+  </script>
+</body>
+</html>
