@@ -26,6 +26,6 @@ def generate_launch_description():
             launch_arguments={"port": str(cfg["rosbridge"]["port"])}.items()),
         Node(package="robot_state_publisher", executable="robot_state_publisher",
              parameters=[{"robot_description": urdf}]),
-        ExecuteProcess(cmd=["python3", "-u", "/app/backend/nodes/joint_sim.py"],
+        ExecuteProcess(cmd=["python3", "-u", "/app/backend/nodes/joint_sim.py"], respawn=True, respawn_delay=1.0,
                        output="screen"),
     ])

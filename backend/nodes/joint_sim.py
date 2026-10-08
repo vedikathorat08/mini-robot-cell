@@ -48,11 +48,11 @@ class JointSim(Node):
     def on_estop(self, msg):
         if msg.data != self.estop:
             self.estop = msg.data
-            self.get_logger().warn(f"E-STOP {'LATCHED' if self.estop else 'RESET'}")
+            self.get_logger().warning(f"E-STOP {'LATCHED' if self.estop else 'RESET'}")
 
     def on_command(self, msg):
         if self.estop:
-            self.get_logger().warn("REJECTED joint command: E-STOP is latched",
+            self.get_logger().warning("REJECTED joint command: E-STOP is latched",
                                    throttle_duration_sec=1.0)
             return
         self.positions = self.apply_command(msg)
