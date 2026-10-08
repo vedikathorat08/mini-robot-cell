@@ -13,3 +13,6 @@ conveyor:
   belt_speed_mps: 0.25
   latency_ms: 200
 home_pose_rad: [0.0, -1.57, 1.57, -1.57, -1.57, 0.0]
+robot:
+  urdf_path: /app/backend/urdf/ur5e.urdf
+  state_rate_hz: 30
