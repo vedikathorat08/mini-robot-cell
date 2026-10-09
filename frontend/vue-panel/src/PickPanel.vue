@@ -34,10 +34,11 @@ function onPick(p) {
     <ul class="readout">
       <li v-if="pick">Pixel (u, v): ({{ fmt(pick.u) }}, {{ fmt(pick.v) }})</li>
       <li v-else>Click the image to pick a point</li>
-      <li v-if="offsetMm">Offset: Δx = {{ fmt(offsetMm.dx) }} mm, Δy = {{ fmt(offsetMm.dy) }} mm</li>
+            <li v-if="offsetMm">Offset: dx = {{ fmt(offsetMm.dx) }} mm, dy = {{ fmt(offsetMm.dy) }} mm</li>
       <li>Scale: {{ mmPerPixel }} mm/px</li>
-      <li>Latency compensation: +{{ fmt(compensationMm) }} mm along +X
-        ({{ beltSpeed }} m/s × {{ latencyMs }} ms)</li>
+            <li>Latency compensation: +{{ fmt(compensationMm) }} mm along +X
+        ({{ beltSpeed }} m/s x {{ latencyMs }} ms)</li>
+      
       <li :class="connected ? 'ok' : 'bad'">pick_target link: {{ connected ? "connected" : "disconnected" }}</li>
     </ul>
   </section>
