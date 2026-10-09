@@ -72,7 +72,8 @@ None. I chose to finish the core and document it honestly.
 ## Image size and build time
 
 - Backend image: 3 GB Size (from `docker images | grep mini-robot-cell`)
-- Frontend image: 29.9 MB 
+- Frontend image: 29.9 MB
+- Cold build time: about 3 minutes (2 min 50 s with `docker compose build --no-cache`; base images already pulled, my laptop and network).
 
 ## How to verify E-STOP and the no-camera fallback
 
