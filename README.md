@@ -80,6 +80,7 @@ None. I chose to finish the core and document it honestly.
 - Ctrl+C: stops within about 10 seconds.
 - Offline: built online, disconnected the network, `docker compose up` (no --build): console, arm and camera panel all loaded.## How to verify E-STOP and the no-camera fallback
 
+## How to verify E-STOP and the no-camera fallback
 **E-STOP (server side):**
 1. Click E-STOP in the UI: red banner, sliders and HOME disabled.
 2. Send a command from a terminal while latched:
