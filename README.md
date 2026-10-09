@@ -71,11 +71,14 @@ None. I chose to finish the core and document it honestly.
 
 ## Image size and build time
 
-- Backend image: 3 GB Size (from `docker images | grep mini-robot-cell`)
-- Frontend image: 29.9 MB
+- Backend image: about 3 GB (ros-base + rosbridge + OpenCV; ROS and OpenCV pull in many dependencies, so I used `ros-base`, not desktop, and cleared the apt lists)
+- Frontend image: about 30 MB (nginx:alpine + built React and Vue bundles + URDF)
 - Cold build time: about 3 minutes (2 min 50 s with `docker compose build --no-cache`; base images already pulled, my laptop and network).
 
-## How to verify E-STOP and the no-camera fallback
+## Tests I ran
+- Fresh clone into a new folder, only `docker compose up --build`: passed.
+- Ctrl+C: stops within about 10 seconds.
+- Offline: built online, disconnected the network, `docker compose up` (no --build): console, arm and camera panel all loaded.## How to verify E-STOP and the no-camera fallback
 
 **E-STOP (server side):**
 1. Click E-STOP in the UI: red banner, sliders and HOME disabled.
