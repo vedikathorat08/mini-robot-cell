@@ -20,7 +20,7 @@ No other steps. Needs Docker with compose v2 only. Network is needed at **build 
 ![React console](docs/screenshot1.png)
 ![Vue camera panel](docs/screenshot2.png)
 
-Demo video: `docs/demo.mp4` (or link: TODO)
+Demo video: `docs/demo.mp4` (or link: https://drive.google.com/file/d/1xSpL94LgDsaTvph-AQZ3cCm7nric05yb/view?usp=sharing)
 
 ## Stack
 
