@@ -56,7 +56,7 @@ Demo video: `docs/demo.mp4` (or link: TODO)
   while latched, it starts unlatched until the UI's next heartbeat (up to 1 s).
 - Camera uses a plain MJPEG stream; no bandwidth adaptation.
 - No automated tests (bonus not attempted).
-- TODO: add anything else you saw break.
+
 
 ## What I'd do next
 
@@ -73,7 +73,6 @@ None. I chose to finish the core and document it honestly.
 
 - Backend image: 3 GB Size (from `docker images | grep mini-robot-cell`)
 - Frontend image: 29.9 MB 
-- Cold build time: about TODO minutes (first `docker compose build --no-cache`).
 
 ## How to verify E-STOP and the no-camera fallback
 
