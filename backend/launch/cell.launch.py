@@ -28,4 +28,10 @@ def generate_launch_description():
              parameters=[{"robot_description": urdf}]),
         ExecuteProcess(cmd=["python3", "-u", "/app/backend/nodes/joint_sim.py"], respawn=True, respawn_delay=1.0,
                        output="screen"),
+        ExecuteProcess(cmd=["python3", "-u", "/app/backend/nodes/joint_sim.py"],
+                       output="screen", respawn=True, respawn_delay=1.0),
+        ExecuteProcess(cmd=["python3", "-u", "/app/backend/nodes/camera_node.py"],
+                       output="screen", respawn=True, respawn_delay=1.0),
+        ExecuteProcess(cmd=["python3", "-u", "/app/backend/nodes/pick_target_logger.py"],
+                       output="screen", respawn=True, respawn_delay=1.0),
     ])

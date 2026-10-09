@@ -8,7 +8,8 @@ RUN set -eux; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
         ros-lyrical-rosbridge-suite \
-        ros-lyrical-robot-state-publisher; \
+        ros-lyrical-robot-state-publisher \
+        python3-pil python3-opencv; \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
