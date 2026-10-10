@@ -20,3 +20,8 @@ camera_http:
   port: 8081
 pick_target:
   units: mm
+table:
+  center_m: [0.4, 0.0]   # table centre in base_link (x forward, y left)
+  size_m: [0.9, 0.7]
+camera_pose:
+  height_m: 0.8          # overhead camera above the table centre, looking down

@@ -12,6 +12,7 @@ export function useRos() {
   const url = rosUrl();
   const [connected, setConnected] = useState(false);
   const [jointStates, setJointStates] = useState(null);
+  const [pickTarget, setPickTarget] = useState(null); // NEW (edit 1)
   const topics = useRef({});
 
   useEffect(() => {
@@ -26,8 +27,11 @@ export function useRos() {
         states.subscribe((msg) =>
           setJointStates(Object.fromEntries(msg.name.map((n, i) => [n, msg.position[i]])))
         );
+        const pick = makeTopic(ros, "/pick_target", "geometry_msgs/msg/PointStamped"); // NEW (edit 2)
+        pick.subscribe((msg) => setPickTarget({ dx: msg.point.x, dy: msg.point.y })); // NEW (edit 2)
         topics.current = {
           states,
+          pick, // NEW (edit 3)
           command: makeTopic(ros, "/joint_command", "sensor_msgs/msg/JointState"),
           estop: makeTopic(ros, "/estop", "std_msgs/msg/Bool"),
         };
@@ -46,6 +50,7 @@ export function useRos() {
       closed = true;
       clearTimeout(timer);
       topics.current.states?.unsubscribe();
+      topics.current.pick?.unsubscribe(); // NEW (edit 4)
       ros?.close();
     };
   }, [url]);
@@ -66,5 +71,5 @@ export function useRos() {
     topics.current.estop?.publish(new ROSLIB.Message({ data: value }));
   }, []);
 
-  return { connected, url, jointStates, publishCommand, publishEstop };
+  return { connected, url, jointStates, pickTarget, publishCommand, publishEstop }; // NEW (edit 4)
 }
