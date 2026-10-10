@@ -12,7 +12,8 @@ export function useRos() {
   const url = rosUrl();
   const [connected, setConnected] = useState(false);
   const [jointStates, setJointStates] = useState(null);
-  const [pickTarget, setPickTarget] = useState(null); // NEW (edit 1)
+  const [pickTarget, setPickTarget] = useState(null);
+  const [ikStatus, setIkStatus] = useState("");
   const topics = useRef({});
 
   useEffect(() => {
@@ -27,13 +28,17 @@ export function useRos() {
         states.subscribe((msg) =>
           setJointStates(Object.fromEntries(msg.name.map((n, i) => [n, msg.position[i]])))
         );
-        const pick = makeTopic(ros, "/pick_target", "geometry_msgs/msg/PointStamped"); // NEW (edit 2)
-        pick.subscribe((msg) => setPickTarget({ dx: msg.point.x, dy: msg.point.y })); // NEW (edit 2)
+        const pick = makeTopic(ros, "/pick_target", "geometry_msgs/msg/PointStamped");
+        pick.subscribe((msg) => setPickTarget({ dx: msg.point.x, dy: msg.point.y }));
+        const ik = makeTopic(ros, "/ik_status", "std_msgs/msg/String");
+        ik.subscribe((msg) => setIkStatus(msg.data));
         topics.current = {
           states,
-          pick, // NEW (edit 3)
+          pick,
+          ik,
           command: makeTopic(ros, "/joint_command", "sensor_msgs/msg/JointState"),
           estop: makeTopic(ros, "/estop", "std_msgs/msg/Bool"),
+          move: makeTopic(ros, "/move_to_pick", "std_msgs/msg/Empty"),
         };
         setConnected(true);
       });
@@ -50,7 +55,8 @@ export function useRos() {
       closed = true;
       clearTimeout(timer);
       topics.current.states?.unsubscribe();
-      topics.current.pick?.unsubscribe(); // NEW (edit 4)
+      topics.current.pick?.unsubscribe();
+      topics.current.ik?.unsubscribe();
       ros?.close();
     };
   }, [url]);
@@ -71,5 +77,9 @@ export function useRos() {
     topics.current.estop?.publish(new ROSLIB.Message({ data: value }));
   }, []);
 
-  return { connected, url, jointStates, pickTarget, publishCommand, publishEstop }; // NEW (edit 4)
+  const moveToPick = useCallback(() => {
+    topics.current.move?.publish(new ROSLIB.Message({}));
+  }, []);
+
+  return { connected, url, jointStates, pickTarget, ikStatus, publishCommand, publishEstop, moveToPick };
 }

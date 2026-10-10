@@ -56,6 +56,7 @@ export default function RobotViewer({ jointValues, onLoaded, config, target }) {
   const robotRef = useRef(null);
   const sceneRef = useRef(null);
   const markerRef = useRef(null);
+  const readoutRef = useRef(null);
 
   useEffect(() => {
     const mount = mountRef.current;
@@ -123,6 +124,11 @@ export default function RobotViewer({ jointValues, onLoaded, config, target }) {
         pos.setXYZ(1, marker.position.x, marker.position.y, marker.position.z);
         pos.needsUpdate = true;
         link.visible = true;
+        if (readoutRef.current) {
+          const mm = tip.distanceTo(marker.position) * 1000;
+          readoutRef.current.textContent =
+            `tool0 to target: ${mm.toFixed(0)} mm (MOVE TO TARGET hovers the tool above it)`; // CHANGED
+        }
       }
       renderer.render(scene, camera);
       frame = requestAnimationFrame(tick);
@@ -165,6 +171,7 @@ export default function RobotViewer({ jointValues, onLoaded, config, target }) {
   return (
     <>
       <div ref={mountRef} className="viewer-canvas" />
+      <div ref={readoutRef} className="readout-3d" />
       <div className="legend">
         Brown = table · dark box = overhead camera · blue lines = camera view · red = pick target
       </div>
