@@ -21,7 +21,7 @@ nothing is downloaded when the containers start.
 ![React console](docs/screenshot1.png)
 ![Vue camera panel](docs/screenshot2.png)
 
-Demo video: https://drive.google.com/file/d/1xSpL94LgDsaTvph-AQZ3cCm7nric05yb/view?usp=sharing
+Demo video: https://drive.google.com/file/d/1XCeClcmiudhYEKdOawyjIpy9Uzjhxmvk/view?usp=sharing
 
 ## Stack
 
