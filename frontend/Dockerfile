@@ -14,6 +14,10 @@ RUN npm install --no-audit --no-fund
 COPY frontend/vue-panel/ ./
 RUN npm run build
 
+# Optional: unit tests (run with: docker build --target vue-test --progress=plain -f frontend/Dockerfile .)
+FROM vue-build AS vue-test
+RUN npm test
+
 # Stage 3: serve only built output, URDF/meshes and config
 FROM nginx:alpine
 COPY frontend/nginx.conf /etc/nginx/conf.d/default.conf
