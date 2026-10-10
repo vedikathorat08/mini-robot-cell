@@ -18,7 +18,7 @@ function extractJoints(robot) {
 }
 
 export default function App() {
-  const { connected, url, jointStates, publishCommand, publishEstop } = useRos();
+  const { connected, url, jointStates, pickTarget, publishCommand, publishEstop } = useRos(); // NEW
   const [config, setConfig] = useState(null);
   const [joints, setJoints] = useState([]);
   const [targets, setTargets] = useState(null);
@@ -87,7 +87,7 @@ export default function App() {
 
       <main>
         <section className="viewer">
-          <RobotViewer jointValues={jointStates} onLoaded={onRobotLoaded} />
+          <RobotViewer jointValues={jointStates} onLoaded={onRobotLoaded} config={config} target={pickTarget} /> {/* NEW */}
         </section>
         <section className="panel">
           <div className="buttons">

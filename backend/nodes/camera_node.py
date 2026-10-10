@@ -22,17 +22,18 @@ def load_config(path=CONFIG_PATH):
 
 
 def synthetic_frame(width, height, t):
-    """Grid background with a moving blob and a timestamp."""
-    img = Image.new("RGB", (width, height), (40, 44, 52))
+    """Top-down view of the table: wood top, grid, and a coloured object moving on it."""
+    img = Image.new("RGB", (width, height), (196, 168, 120))
     draw = ImageDraw.Draw(img)
     for x in range(0, width, 80):
-        draw.line([(x, 0), (x, height)], fill=(70, 75, 85))
+        draw.line([(x, 0), (x, height)], fill=(180, 152, 106))
     for y in range(0, height, 80):
-        draw.line([(0, y), (width, y)], fill=(70, 75, 85))
+        draw.line([(0, y), (width, y)], fill=(180, 152, 106))
     cx = width / 2 + math.cos(t) * width * 0.3
     cy = height / 2 + math.sin(t * 0.7) * height * 0.3
-    draw.ellipse([cx - 40, cy - 40, cx + 40, cy + 40], fill=(230, 90, 40))
-    draw.text((20, 20), "SYNTHETIC CAMERA  " + time.strftime("%H:%M:%S"), fill=(255, 255, 255))
+    draw.ellipse([cx - 40, cy - 40, cx + 40, cy + 40], fill=(40, 90, 200))
+    draw.text((20, 20), "OVERHEAD CAMERA (top-down)  " + time.strftime("%H:%M:%S"), fill=(30, 30, 30))
+    draw.text((20, 40), "image up = +X base, image right = -Y base", fill=(30, 30, 30))
     return img
 
 
