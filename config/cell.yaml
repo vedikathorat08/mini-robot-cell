@@ -25,3 +25,5 @@ table:
   size_m: [0.9, 0.7]
 camera_pose:
   height_m: 0.8          # overhead camera above the table centre, looking down
+ik:
+  hover_m: 0.10   # tool0 hovers this far above the table at the picked point
